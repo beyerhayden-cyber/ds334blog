@@ -1,28 +1,19 @@
 [
   {
-    "listing": "/index2.html",
-    "items": [
-      "/posts/post-with-code/index2.html",
-      "/posts/blog/index.html",
-      "/posts/post-with-code/index.html",
-      "/posts/welcome/index.html"
-    ]
+    "listing": "/posts/blog/index.html",
+    "items": []
+  },
+  {
+    "listing": "/posts/Blog 2/index.html",
+    "items": []
   },
   {
     "listing": "/index.html",
     "items": [
-      "/posts/post-with-code/index2.html",
+      "/posts/Blog 2/index.html",
       "/posts/blog/index.html",
       "/posts/post-with-code/index.html",
       "/posts/welcome/index.html"
     ]
-  },
-  {
-    "listing": "/posts/post-with-code/index2.html",
-    "items": []
-  },
-  {
-    "listing": "/posts/blog/index.html",
-    "items": []
   }
 ]
