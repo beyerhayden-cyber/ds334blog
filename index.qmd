@@ -274,7 +274,6 @@ state_world_potential <- state_world_potential |>
 ```
 
 ```{r message=FALSE}
-
 state_full2 <- right_join(state_df2, state_world_potential, by = c("region" = "state_name"))
 ```
 
