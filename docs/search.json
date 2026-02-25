@@ -4,7 +4,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this blog"
+    "text": "This blog displays the application of the curriculum from Data Science-334 on data visualization at St. Lawrence University."
   },
   {
     "objectID": "posts/blog/index.html",
@@ -63,53 +63,53 @@
     "text": "Conclusion\nSome flaws with our current approach is when we look at state average estimated salary there are major wealth distributions within states (i.e. NYC is a lot more wealthy than upstate NY). Additionally sticker tuition price versus the actual tuition price is very different in the sense that scholarships/grants/financial can significantly lower the price of an institution. A prime example is St. Lawrence, which has a high sticker price but gives out a lot of scholarships and grants.\nIf we have more data or time we could look into a cost of living adjustment. States like California tend to have higher costs of living there tend to have higher salaries compared to southern states which is the opposite. It would be interesting to look at the ratio between cost of living and estimated salary to see if there is any variability between states. Additionally it would be interesting to look at data post Covid-19 pandemic.\n\nConnection to Class Ideas\nLooking at some of our graphs, we tried to display different trends depending on groups whether it was regions, diversity, type of school etc. It is important to take the context of the group and what we are comparing to make a graph. An example of this is that rather than taking all 50 states and comparing there estimate salary in a bar plot, we instead plotted them on a map with a colour scale to show regional similarities and differences. Additionally this method is useful as the map adds a sense of visual appeal to the viewer."
   },
   {
-    "objectID": "posts/Blog 2/index.html",
-    "href": "posts/Blog 2/index.html",
+    "objectID": "posts/blog 2/index.html",
+    "href": "posts/blog 2/index.html",
     "title": "Blog 2",
     "section": "",
     "text": "In honor of the 2026 Milan and Cortina olympic games I am going to dive back into the results from the 2014 Sochi Winter games. The following imported data set is all 120 years of olympics however I have filtered it to only include results from the 2014 Olympic games. From this we can see which athletes and countries were successful as well as the the distribution of athletes age, nationality, efficiency rating, etc.\n\n\nlibrary(dplyr)\nlibrary(ggplot2)\nolympics &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-08-06/olympics.csv')\nsochi_olympics &lt;- olympics |&gt; filter(city == \"Sochi\")"
   },
   {
-    "objectID": "posts/Blog 2/index.html#introduction",
-    "href": "posts/Blog 2/index.html#introduction",
+    "objectID": "posts/blog 2/index.html#introduction",
+    "href": "posts/blog 2/index.html#introduction",
     "title": "Blog 2",
     "section": "",
     "text": "In honor of the 2026 Milan and Cortina olympic games I am going to dive back into the results from the 2014 Sochi Winter games. The following imported data set is all 120 years of olympics however I have filtered it to only include results from the 2014 Olympic games. From this we can see which athletes and countries were successful as well as the the distribution of athletes age, nationality, efficiency rating, etc.\n\n\nlibrary(dplyr)\nlibrary(ggplot2)\nolympics &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-08-06/olympics.csv')\nsochi_olympics &lt;- olympics |&gt; filter(city == \"Sochi\")"
   },
   {
-    "objectID": "posts/Blog 2/index.html#question-1",
-    "href": "posts/Blog 2/index.html#question-1",
+    "objectID": "posts/blog 2/index.html#question-1",
+    "href": "posts/blog 2/index.html#question-1",
     "title": "Blog 2",
     "section": "Question 1",
     "text": "Question 1\n\nWhat which country was the most successful in this olympic games?\n\n\nsochi_success &lt;- sochi_olympics |&gt; filter(!is.na(medal))|&gt; group_by(noc, medal) |&gt; summarise(count = n())\n\nsochi_success &lt;- sochi_success |&gt; group_by(noc) |&gt; mutate(total_medals = sum(count)) |&gt; arrange(desc(total_medals)) |&gt; filter(total_medals &gt;= 20) |&gt; filter(medal == \"Gold\")\n\n\nggplot(data = sochi_success, aes(x = reorder(noc, -total_medals), y = total_medals)) + geom_col() + \n  theme_minimal() + labs(\n    title = \"Sochi Olympic Medal Count\",\n    x = \"Country\",\n    y = \"Total Medal Count\"\n  )\n\n\n\n\n\nAs we can see from the graph above Canada received the most almost doubling the 5th ranked country Germany."
   },
   {
-    "objectID": "posts/Blog 2/index.html#question-2",
-    "href": "posts/Blog 2/index.html#question-2",
+    "objectID": "posts/blog 2/index.html#question-2",
+    "href": "posts/blog 2/index.html#question-2",
     "title": "Blog 2",
     "section": "Question 2",
     "text": "Question 2\n\nWho was the most successful athlete in the Sochi olympics?\n\n\nsochi_athlete &lt;- sochi_olympics |&gt; filter(!is.na(medal)) |&gt; group_by(name) |&gt; summarise(total_medals = n()) |&gt; filter(total_medals &gt;= 3) \n\n\nggplot(data = sochi_athlete, aes(x = reorder(name, -total_medals), y = total_medals)) + geom_col() + \n  theme_minimal() + labs(\n    title = \"Sochi Olympic Medal Count\",\n    x = \"Name\",\n    y = \"Total Medal Count\"\n  ) + theme(\n  axis.text.x = element_text(angle = 70, hjust = 1)\n)\n\n\n\n\n\nAs we can see from the plot above Irene Wst took home a grand total of 5 medals during the the Sochi Olympics! While over 14 athletes took home 3 or more medals."
   },
   {
-    "objectID": "posts/Blog 2/index.html#question-3",
-    "href": "posts/Blog 2/index.html#question-3",
+    "objectID": "posts/blog 2/index.html#question-3",
+    "href": "posts/blog 2/index.html#question-3",
     "title": "Blog 2",
     "section": "Question 3",
     "text": "Question 3\nWhat is the age distribution of athletes in the Sochi games?\n\nsochi_age &lt;- sochi_olympics |&gt; group_by(name) |&gt; slice(1)\n  \n  \nggplot(data = sochi_age, aes(x = sex, y = age, fill = sex)) + geom_boxplot() + labs(title = \"Sochi Age Distribution by Gender\",\n       x = \"Sex\",\n       y = \"Age\") +\n  theme_minimal()\n\n\n\n\n\nIt is interesting to see the mean age difference between female sex and male sex, as males on average tend to be older than females. It is really interesting to see the outliers especially looking at Hubertus Rudolph von Frstenberg-von Hohenlohe-Langenburg, an apline skier who competed at 55 years old!"
   },
   {
-    "objectID": "posts/Blog 2/index.html#question-6",
-    "href": "posts/Blog 2/index.html#question-6",
+    "objectID": "posts/blog 2/index.html#question-6",
+    "href": "posts/blog 2/index.html#question-6",
     "title": "Blog 2",
     "section": "Question 6",
     "text": "Question 6\nWhat is the distribution of athletes sent by country?\n\nsochi_success2 &lt;- sochi_olympics |&gt; group_by(team) |&gt; summarise(count = n()) |&gt; mutate(team = if_else(team == \"United States\", \n                           true = \"USA\", \n                           false = team)) |&gt;  mutate(team = if_else(team == \"Great Britain\", \n                           true = \"UK\", \n                           false = team))\n\n\nworld_map &lt;- map_data(\"world\")\n\nworld_joined &lt;-left_join(world_map,sochi_success2 , join_by(region == team))\n\nggplot(data = world_joined, aes(x = long, y = lat, group = group)) + \n  geom_polygon(aes(fill = count)) + coord_map(projection = \"gilbert\") + \n  scale_fill_viridis_c() +\n  xlim(c(-180, 180)) + labs(title = \"Sochi Number of Athletes Per Country\",\n       x = \"Longitude\",\n       y = \"Latitiude\")\n\n\n\n\nWhen it comes to the Winter Olympics, the more developed a country is the more athletes they send. Looking at the United States, Canada and then majority of Europe, they tend to send 200+ athletes where the global south sends a very small amount, of if any."
   },
   {
-    "objectID": "posts/Blog 2/index.html#conclusion",
-    "href": "posts/Blog 2/index.html#conclusion",
+    "objectID": "posts/blog 2/index.html#conclusion",
+    "href": "posts/blog 2/index.html#conclusion",
     "title": "Blog 2",
     "section": "Conclusion",
-    "text": "Conclusion\n\nTo represent the data in the best way possible I used a combination of parts from our “Grammar of Graphics” section such as geom_col() and geom_boxplot() to accurately represent the data. The boxplot is a a much better way to represent the data as it shows the spread rather that just a mean. This allows use to look at the outlier’s such at the 55 and 15 year old medalist.\n\nSome flaws in my approach that could be fixed with either more time more information is determining whether or not total medal count includes team sports or not. I included team sports in medal count therefore Canada, who won the hockey tournament appeared to have the most medals. However, if you were to only count hockey as one medal then Russia and the USA would have more medals than Canada. Additionally, when I joined the Olympic data set to the world map, I had to rename both US and Great Britain so they would join correctly. I was able to catch this mistake as from back ground knowledge I know they always send a lot of athletes however both came up gray when I first ran it. If I were able to have more time I could filter through the data to ensure that no names were missed. This flaw has potential to underrespresent some countries on the map."
+    "text": "Conclusion\n\nTo represent the data in the best way possible I used a combination of parts from our “Grammar of Graphics” section such as geom_col() and geom_boxplot() to accurately represent the data. The boxplot is a a much better way to represent the data as it shows the spread rather that just a mean. This allows use to look at the outlier’s such at the 55 and 15 year old medalist.\n\nSome flaws in my approach that could be fixed with either more time more information is determining whether or not total medal count includes team sports or not. I included team sports in medal count therefore Canada, who won the hockey tournament appeared to have the most medals. However, if you were to only count hockey as one medal then Russia and the USA would have more medals than Canada. Additionally, when I joined the Olympic data set to the world map, I had to rename both US and Great Britain so they would join correctly. I was able to catch this mistake as from back ground knowledge I know they always send a lot of athletes however both came up gray when I first ran it. If I were able to have more time I could filter through the data to ensure that no names were missed. This flaw has potential to under respresent some countries on the map."
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -117,6 +117,55 @@
     "title": "Post With Code",
     "section": "",
     "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "posts/blog 2/index2.html",
+    "href": "posts/blog 2/index2.html",
+    "title": "Blog 2",
+    "section": "",
+    "text": "In honor of the 2026 Milan and Cortina olympic games I am going to dive back into the results from the 2014 Sochi Winter games. The following imported data set is all 120 years of olympics however I have filtered it to only include results from the 2014 Olympic games. From this we can see which athletes and countries were successful as well as the the distribution of athletes age, nationality, efficiency rating, etc.\n\n\nlibrary(dplyr)\nlibrary(ggplot2)\nolympics &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-08-06/olympics.csv')\nsochi_olympics &lt;- olympics |&gt; filter(city == \"Sochi\")"
+  },
+  {
+    "objectID": "posts/blog 2/index2.html#introduction",
+    "href": "posts/blog 2/index2.html#introduction",
+    "title": "Blog 2",
+    "section": "",
+    "text": "In honor of the 2026 Milan and Cortina olympic games I am going to dive back into the results from the 2014 Sochi Winter games. The following imported data set is all 120 years of olympics however I have filtered it to only include results from the 2014 Olympic games. From this we can see which athletes and countries were successful as well as the the distribution of athletes age, nationality, efficiency rating, etc.\n\n\nlibrary(dplyr)\nlibrary(ggplot2)\nolympics &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-08-06/olympics.csv')\nsochi_olympics &lt;- olympics |&gt; filter(city == \"Sochi\")"
+  },
+  {
+    "objectID": "posts/blog 2/index2.html#question-1",
+    "href": "posts/blog 2/index2.html#question-1",
+    "title": "Blog 2",
+    "section": "Question 1",
+    "text": "Question 1\n\nWhat which country was the most successful in this olympic games?\n\n\nsochi_success &lt;- sochi_olympics |&gt; filter(!is.na(medal))|&gt; group_by(noc, medal) |&gt; summarise(count = n())\n\nsochi_success &lt;- sochi_success |&gt; group_by(noc) |&gt; mutate(total_medals = sum(count)) |&gt; arrange(desc(total_medals)) |&gt; filter(total_medals &gt;= 20) |&gt; filter(medal == \"Gold\")\n\n\nggplot(data = sochi_success, aes(x = reorder(noc, -total_medals), y = total_medals)) + geom_col() + \n  theme_minimal() + labs(\n    title = \"Sochi Olympic Medal Count\",\n    x = \"Country\",\n    y = \"Total Medal Count\"\n  )\n\n\n\n\n\nAs we can see from the graph above Canada received the most almost doubling the 5th ranked country Germany."
+  },
+  {
+    "objectID": "posts/blog 2/index2.html#question-2",
+    "href": "posts/blog 2/index2.html#question-2",
+    "title": "Blog 2",
+    "section": "Question 2",
+    "text": "Question 2\n\nWho was the most successful athlete in the Sochi olympics?\n\n\nsochi_athlete &lt;- sochi_olympics |&gt; filter(!is.na(medal)) |&gt; group_by(name) |&gt; summarise(total_medals = n()) |&gt; filter(total_medals &gt;= 3) \n\n\nggplot(data = sochi_athlete, aes(x = reorder(name, -total_medals), y = total_medals)) + geom_col() + \n  theme_minimal() + labs(\n    title = \"Sochi Olympic Medal Count\",\n    x = \"Name\",\n    y = \"Total Medal Count\"\n  ) + theme(\n  axis.text.x = element_text(angle = 70, hjust = 1)\n)\n\n\n\n\n\nAs we can see from the plot above Irene Wst took home a grand total of 5 medals during the the Sochi Olympics! While over 14 athletes took home 3 or more medals."
+  },
+  {
+    "objectID": "posts/blog 2/index2.html#question-3",
+    "href": "posts/blog 2/index2.html#question-3",
+    "title": "Blog 2",
+    "section": "Question 3",
+    "text": "Question 3\nWhat is the age distribution of athletes in the Sochi games?\n\nsochi_age &lt;- sochi_olympics |&gt; group_by(name) |&gt; slice(1)\n  \n  \nggplot(data = sochi_age, aes(x = sex, y = age, fill = sex)) + geom_boxplot() + labs(title = \"Sochi Age Distribution by Gender\",\n       x = \"Sex\",\n       y = \"Age\") +\n  theme_minimal()\n\n\n\n\n\nIt is interesting to see the mean age difference between female sex and male sex, as males on average tend to be older than females. It is really interesting to see the outliers especially looking at Hubertus Rudolph von Frstenberg-von Hohenlohe-Langenburg, an apline skier who competed at 55 years old!"
+  },
+  {
+    "objectID": "posts/blog 2/index2.html#question-6",
+    "href": "posts/blog 2/index2.html#question-6",
+    "title": "Blog 2",
+    "section": "Question 6",
+    "text": "Question 6\nWhat is the distribution of athletes sent by country?\n\nsochi_success2 &lt;- sochi_olympics |&gt; group_by(team) |&gt; summarise(count = n()) |&gt; mutate(team = if_else(team == \"United States\", \n                           true = \"USA\", \n                           false = team)) |&gt;  mutate(team = if_else(team == \"Great Britain\", \n                           true = \"UK\", \n                           false = team))\n\n\nworld_map &lt;- map_data(\"world\")\n\nworld_joined &lt;-left_join(world_map,sochi_success2 , join_by(region == team))\n\nggplot(data = world_joined, aes(x = long, y = lat, group = group)) + \n  geom_polygon(aes(fill = count)) + coord_map(projection = \"gilbert\") + \n  scale_fill_viridis_c() +\n  xlim(c(-180, 180)) + labs(title = \"Sochi Number of Athletes Per Country\",\n       x = \"Longitude\",\n       y = \"Latitiude\")\n\n\n\n\nWhen it comes to the Winter Olympics, the more developed a country is the more athletes they send. Looking at the United States, Canada and then majority of Europe, they tend to send 200+ athletes where the global south sends a very small amount, of if any."
+  },
+  {
+    "objectID": "posts/blog 2/index2.html#conclusion",
+    "href": "posts/blog 2/index2.html#conclusion",
+    "title": "Blog 2",
+    "section": "Conclusion",
+    "text": "Conclusion\n\nTo represent the data in the best way possible I used a combination of parts from our “Grammar of Graphics” section such as geom_col() and geom_boxplot() to accurately represent the data. The boxplot is a a much better way to represent the data as it shows the spread rather that just a mean. This allows use to look at the outlier’s such at the 55 and 15 year old medalist.\n\nSome flaws in my approach that could be fixed with either more time more information is determining whether or not total medal count includes team sports or not. I included team sports in medal count therefore Canada, who won the hockey tournament appeared to have the most medals. However, if you were to only count hockey as one medal then Russia and the USA would have more medals than Canada. Additionally, when I joined the Olympic data set to the world map, I had to rename both US and Great Britain so they would join correctly. I was able to catch this mistake as from back ground knowledge I know they always send a lot of athletes however both came up gray when I first ran it. If I were able to have more time I could filter through the data to ensure that no names were missed. This flaw has potential to under respresent some countries on the map."
   },
   {
     "objectID": "posts/welcome/index.html",

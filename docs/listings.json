@@ -4,13 +4,18 @@
     "items": []
   },
   {
-    "listing": "/posts/Blog 2/index.html",
+    "listing": "/posts/blog 2/index.html",
+    "items": []
+  },
+  {
+    "listing": "/posts/blog 2/index2.html",
     "items": []
   },
   {
     "listing": "/index.html",
     "items": [
-      "/posts/Blog 2/index.html",
+      "/posts/blog 2/index2.html",
+      "/posts/blog 2/index.html",
       "/posts/blog/index.html",
       "/posts/post-with-code/index.html",
       "/posts/welcome/index.html"

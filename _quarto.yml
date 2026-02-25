@@ -3,17 +3,15 @@ project:
   output-dir: docs
 
 website:
-  title: "ds334blog"
+  title: "Blog for Data Science-334 at St. Lawrence University"
   navbar:
     right:
       - about.qmd
       - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+        href: https://github.com/beyerhayden-cyber
 format:
   html:
-    theme: cosmo
+    theme: superhero
     css: styles.css
 
 editor: visual
