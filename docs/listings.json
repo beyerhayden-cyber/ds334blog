@@ -16,9 +16,18 @@
     "items": [
       "/posts/blog 2/index2.html",
       "/posts/blog 2/index.html",
+      "/posts/blog 3/index.html",
       "/posts/blog/index.html",
       "/posts/post-with-code/index.html",
       "/posts/welcome/index.html"
     ]
+  },
+  {
+    "listing": "/posts/blog 3/index2.html",
+    "items": []
+  },
+  {
+    "listing": "/posts/blog 3/index.html",
+    "items": []
   }
 ]
