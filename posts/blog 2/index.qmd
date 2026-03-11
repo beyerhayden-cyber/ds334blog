@@ -13,6 +13,7 @@ title-block-banner: true
 ---
 
 ## Introduction:
+
 In honor of the 2026 Milan and Cortina olympic games I am going to dive back into the results from the 2014 Sochi Winter games. The following imported data set is all 120 years of olympics however I have filtered it to only include results from the 2014 Olympic games. From this we can see which athletes and countries were successful as well as the the distribution of athletes age, nationality, efficiency rating, etc.
 
 ```{r message=FALSE}
@@ -65,7 +66,7 @@ ggplot(data = sochi_athlete, aes(x = reorder(name, -total_medals), y = total_med
 
 ## Question 3
 
-- What is the age distribution of athletes in the Sochi games?
+-   What is the age distribution of athletes in the Sochi games?
 
 ```{r message=FALSE}
 sochi_age <- sochi_olympics |> group_by(name) |> slice(1)
@@ -81,7 +82,7 @@ ggplot(data = sochi_age, aes(x = sex, y = age, fill = sex)) + geom_boxplot() + l
 
 # Question 4
 
-- How is efficient is each country at the Olympic games, i.e. what is their ratio of athletes sent versus medals won?
+-   How is efficient is each country at the Olympic games, i.e. what is their ratio of athletes sent versus medals won?
 
 ```{r message=FALSE}
 sochi_efficiency <- sochi_olympics |> 
@@ -117,11 +118,11 @@ ggplot(data = sochi_age_suc, aes(x = sex, y = age, fill = sex)) + geom_boxplot()
   theme_minimal()
 ```
 
-- Here we see the mean age increase by about 2-3 years for each gender in terms of winning a medal or not, showing the experience can help lead to success. Again it is really cool to see the outliers of the age distribution seeing 43 year old Teemu Ilmari Selnne winning a medal at age 43 and then Alina Mller winning a medal at an age of 15!
+-   Here we see the mean age increase by about 2-3 years for each gender in terms of winning a medal or not, showing the experience can help lead to success. Again it is really cool to see the outliers of the age distribution seeing 43 year old Teemu Ilmari Selnne winning a medal at age 43 and then Alina Mller winning a medal at an age of 15!
 
 ## Question 6
 
-- What is the distribution of athletes sent by country?
+-   What is the distribution of athletes sent by country?
 
 ```{r message=FALSE}
 sochi_success2 <- sochi_olympics |> group_by(team) |> summarise(count = n()) |> mutate(team = if_else(team == "United States", 
@@ -144,10 +145,10 @@ ggplot(data = world_joined, aes(x = long, y = lat, group = group)) +
   
 ```
 
-- When it comes to the Winter Olympics, the more developed a country is the more athletes they send. Looking at the United States, Canada and then majority of Europe, they tend to send 200+ athletes where the global south sends a very small amount, of if any.
+-   When it comes to the Winter Olympics, the more developed a country is the more athletes they send. Looking at the United States, Canada and then majority of Europe, they tend to send 200+ athletes where the global south sends a very small amount, of if any.
 
 ## Conclusion
 
 -   To represent the data in the best way possible I used a combination of parts from our "Grammar of Graphics" section such as geom_col() and geom_boxplot() to accurately represent the data. The boxplot is a a much better way to represent the data as it shows the spread rather that just a mean. This allows use to look at the outlier's such at the 55 and 15 year old medalist.
 
-- Some flaws in my approach that could be fixed with either more time more information is determining whether or not total medal count includes team sports or not. I included team sports in medal count therefore Canada, who won the hockey tournament appeared to have the most medals. However, if you were to only count hockey as one medal then Russia and the USA would have more medals than Canada. Additionally, when I joined the Olympic data set to the world map, I had to rename both US and Great Britain so they would join correctly. I was able to catch this mistake as from back ground knowledge I know they always send a lot of athletes however both came up gray when I first ran it. If I were able to have more time I could filter through the data to ensure that no names were missed. This flaw has potential to under respresent some countries on the map.
+-   Some flaws in my approach that could be fixed with either more time more information is determining whether or not total medal count includes team sports or not. I included team sports in medal count therefore Canada, who won the hockey tournament appeared to have the most medals. However, if you were to only count hockey as one medal then Russia and the USA would have more medals than Canada. Additionally, when I joined the Olympic data set to the world map, I had to rename both US and Great Britain so they would join correctly. I was able to catch this mistake as from back ground knowledge I know they always send a lot of athletes however both came up gray when I first ran it. If I were able to have more time I could filter through the data to ensure that no names were missed. This flaw has potential to under respresent some countries on the map.
