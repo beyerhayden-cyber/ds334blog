@@ -207,9 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction:</h2>
-<ul>
-<li>In honor of the 2026 Milan and Cortina olympic games I am going to dive back into the results from the 2014 Sochi Winter games. The following imported data set is all 120 years of olympics however I have filtered it to only include results from the 2014 Olympic games. From this we can see which athletes and countries were successful as well as the the distribution of athletes age, nationality, efficiency rating, etc.</li>
-</ul>
+<p>In honor of the 2026 Milan and Cortina olympic games I am going to dive back into the results from the 2014 Sochi Winter games. The following imported data set is all 120 years of olympics however I have filtered it to only include results from the 2014 Olympic games. From this we can see which athletes and countries were successful as well as the the distribution of athletes age, nationality, efficiency rating, etc.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -269,7 +267,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="question-3" class="level2">
 <h2 class="anchored" data-anchor-id="question-3">Question 3</h2>
-<p>What is the age distribution of athletes in the Sochi games?</p>
+<ul>
+<li>What is the age distribution of athletes in the Sochi games?</li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sochi_age <span class="ot">&lt;-</span> sochi_olympics <span class="sc">|&gt;</span> <span class="fu">group_by</span>(name) <span class="sc">|&gt;</span> <span class="fu">slice</span>(<span class="dv">1</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -288,7 +288,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="question-4" class="level1">
 <h1>Question 4</h1>
-<p>How is efficient is each country at the Olympic games, i.e.&nbsp;what is their ratio of athletes sent versus medals won?</p>
+<ul>
+<li>How is efficient is each country at the Olympic games, i.e.&nbsp;what is their ratio of athletes sent versus medals won?</li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sochi_efficiency <span class="ot">&lt;-</span> sochi_olympics <span class="sc">|&gt;</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(noc) <span class="sc">|&gt;</span> </span>
@@ -328,10 +330,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Here we see the mean age increase by about 2-3 years for each gender in terms of winning a medal or not, showing the experience can help lead to success. Again it is really cool to see the outliers of the age distribution seeing 43 year old Teemu Ilmari Selnne winning a medal at age 43 and then Alina Mller winning a medal at an age of 15!</p>
+<ul>
+<li>Here we see the mean age increase by about 2-3 years for each gender in terms of winning a medal or not, showing the experience can help lead to success. Again it is really cool to see the outliers of the age distribution seeing 43 year old Teemu Ilmari Selnne winning a medal at age 43 and then Alina Mller winning a medal at an age of 15!</li>
+</ul>
 <section id="question-6" class="level2">
 <h2 class="anchored" data-anchor-id="question-6">Question 6</h2>
-<p>What is the distribution of athletes sent by country?</p>
+<ul>
+<li>What is the distribution of athletes sent by country?</li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sochi_success2 <span class="ot">&lt;-</span> sochi_olympics <span class="sc">|&gt;</span> <span class="fu">group_by</span>(team) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">team =</span> <span class="fu">if_else</span>(team <span class="sc">==</span> <span class="st">"United States"</span>, </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">true =</span> <span class="st">"USA"</span>, </span>
@@ -354,14 +360,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>When it comes to the Winter Olympics, the more developed a country is the more athletes they send. Looking at the United States, Canada and then majority of Europe, they tend to send 200+ athletes where the global south sends a very small amount, of if any.</p>
+<ul>
+<li>When it comes to the Winter Olympics, the more developed a country is the more athletes they send. Looking at the United States, Canada and then majority of Europe, they tend to send 200+ athletes where the global south sends a very small amount, of if any.</li>
+</ul>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <ul>
-<li>To represent the data in the best way possible I used a combination of parts from our “Grammar of Graphics” section such as geom_col() and geom_boxplot() to accurately represent the data. The boxplot is a a much better way to represent the data as it shows the spread rather that just a mean. This allows use to look at the outlier’s such at the 55 and 15 year old medalist.</li>
+<li><p>To represent the data in the best way possible I used a combination of parts from our “Grammar of Graphics” section such as geom_col() and geom_boxplot() to accurately represent the data. The boxplot is a a much better way to represent the data as it shows the spread rather that just a mean. This allows use to look at the outlier’s such at the 55 and 15 year old medalist.</p></li>
+<li><p>Some flaws in my approach that could be fixed with either more time more information is determining whether or not total medal count includes team sports or not. I included team sports in medal count therefore Canada, who won the hockey tournament appeared to have the most medals. However, if you were to only count hockey as one medal then Russia and the USA would have more medals than Canada. Additionally, when I joined the Olympic data set to the world map, I had to rename both US and Great Britain so they would join correctly. I was able to catch this mistake as from back ground knowledge I know they always send a lot of athletes however both came up gray when I first ran it. If I were able to have more time I could filter through the data to ensure that no names were missed. This flaw has potential to under respresent some countries on the map.</p></li>
 </ul>
-<p>Some flaws in my approach that could be fixed with either more time more information is determining whether or not total medal count includes team sports or not. I included team sports in medal count therefore Canada, who won the hockey tournament appeared to have the most medals. However, if you were to only count hockey as one medal then Russia and the USA would have more medals than Canada. Additionally, when I joined the Olympic data set to the world map, I had to rename both US and Great Britain so they would join correctly. I was able to catch this mistake as from back ground knowledge I know they always send a lot of athletes however both came up gray when I first ran it. If I were able to have more time I could filter through the data to ensure that no names were missed. This flaw has potential to under respresent some countries on the map.</p>
 
 
 
